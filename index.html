@@ -3,42 +3,310 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SecurePatrol Policies</title>
+  <title>SecurePatrol | QR Patrol Operations</title>
+  <meta name="description" content="SecurePatrol is a QR-based security patrol app with role-based access, on-device storage, and encrypted backups.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #f6f8f5;
+      --ink: #162220;
+      --muted: #4c635e;
+      --card: #ffffff;
+      --line: #d3dfda;
+      --brand: #1f8b73;
+      --brand-dark: #0f5a4a;
+      --warm: #f0a868;
+      --shadow: 0 20px 50px rgba(18, 42, 37, 0.12);
+      --r: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: #f7f9fc;
-      color: #172033;
+      font-family: "Outfit", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% -10%, #dff4ee 0%, transparent 45%),
+        radial-gradient(circle at 95% 0%, #fbe8d8 0%, transparent 35%),
+        var(--bg);
+      line-height: 1.55;
     }
-    main {
-      max-width: 760px;
-      margin: 48px auto;
-      padding: 0 16px;
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 22px 18px 70px;
     }
-    .card {
-      background: #fff;
-      border: 1px solid #d7dfef;
-      border-radius: 14px;
-      padding: 24px;
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 28px;
     }
-    h1 { margin: 0 0 10px; }
-    p { margin: 0 0 16px; }
-    a {
-      color: #2459c6;
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Space Grotesk", "Outfit", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(31, 139, 115, 0.35);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255,255,255,0.85);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    a:hover { text-decoration: underline; }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(12, 41, 34, .1);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", "Outfit", sans-serif;
+      font-size: clamp(31px, 5vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.8vw, 18px);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chips li {
+      background: #ebf5f2;
+      color: #134b3f;
+      border: 1px solid #c8ddd7;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-main {
+      background: linear-gradient(120deg, var(--brand), #2ea185);
+      color: white;
+      box-shadow: 0 10px 25px rgba(31, 139, 115, .3);
+    }
+
+    .btn-ghost {
+      border-color: var(--line);
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .mock {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid #bcd2cb;
+      background: linear-gradient(180deg, #e7f4ef 0%, #d5ebe4 100%);
+      min-height: 290px;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+    }
+
+    .mock img {
+      width: 82%;
+      max-width: 270px;
+      border-radius: 18px;
+      border: 1px solid #bfd6cf;
+      box-shadow: 0 18px 35px rgba(22, 64, 52, 0.25);
+      transform: rotate(-3deg);
+    }
+
+    .dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--warm);
+      box-shadow: 0 0 0 8px rgba(240, 168, 104, 0.2);
+      right: 18px;
+      top: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 15px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .shots img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #c6d9d3;
+      box-shadow: 0 12px 26px rgba(14, 45, 37, 0.12);
+      background: #fff;
+    }
+
+    footer {
+      margin-top: 18px;
+      color: #557069;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .shots { grid-template-columns: 1fr; }
+      .panel { padding: 20px; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <div class="card">
-      <h1>SecurePatrol</h1>
-      <p>Public policy pages for SecurePatrol.</p>
-      <p><a href="./privacy-policy.html">Open Privacy Policy</a></p>
-    </div>
-  </main>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <img src="./assets/app-icon.png" alt="SecurePatrol icon">
+        <span>SecurePatrol</span>
+      </div>
+      <a class="cta" href="./privacy-policy.html">Privacy Policy</a>
+    </header>
+
+    <section class="hero">
+      <div class="panel">
+        <h1>Security Patrol, Verified by QR.</h1>
+        <p class="lead">SecurePatrol helps security teams run accountable patrol rounds with role-based access, tamper-aware logs, and local-first data control.</p>
+        <ul class="chips">
+          <li>On-device by default</li>
+          <li>No cloud backend</li>
+          <li>Encrypted backups</li>
+          <li>Role-based PIN access</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-main" href="./privacy-policy.html">Read Privacy Policy</a>
+          <a class="btn btn-ghost" href="#preview">View App Preview</a>
+        </div>
+      </div>
+      <div class="mock">
+        <span class="dot" aria-hidden="true"></span>
+        <img src="./assets/screen-lock.png" alt="SecurePatrol lock screen preview">
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h3>Operational Control</h3>
+        <p>Track patrol start/end, scan checkpoints in sequence, and review detailed logs for accountability.</p>
+      </article>
+      <article class="card">
+        <h3>Security-First Access</h3>
+        <p>Admin and Guard roles with PIN authentication, rate limiting, and audit trail for critical actions.</p>
+      </article>
+      <article class="card">
+        <h3>Local-First Data Model</h3>
+        <p>App data stays on-device. Optional local LAN sync is initiated only between authorized devices.</p>
+      </article>
+    </section>
+
+    <section id="preview" class="panel">
+      <h2 style="margin: 0 0 10px; font-family: 'Space Grotesk', sans-serif;">App Preview</h2>
+      <p style="margin: 0 0 14px; color: var(--muted);">Real screenshots from SecurePatrol.</p>
+      <div class="shots">
+        <img src="./assets/screen-lock.png" alt="SecurePatrol login screen">
+        <img src="./assets/screen-main.png" alt="SecurePatrol main dashboard">
+      </div>
+    </section>
+
+    <footer>
+      SecurePatrol • Security patrol operations app • Contact: denversavio@gmail.com
+    </footer>
+  </div>
 </body>
 </html>
