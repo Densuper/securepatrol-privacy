@@ -7,48 +7,41 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f7f9fc;
+      --bg: #f4f7fb;
       --card: #ffffff;
-      --text: #172033;
-      --muted: #50607f;
-      --line: #d7dfef;
-      --accent: #2459c6;
+      --text: #1d2738;
+      --muted: #51617a;
+      --line: #d4deef;
+      --accent: #1f5cc6;
     }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       line-height: 1.55;
     }
     main {
       max-width: 920px;
-      margin: 32px auto;
+      margin: 28px auto;
       padding: 0 16px;
     }
     article {
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 24px;
     }
     h1, h2 {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       line-height: 1.25;
     }
-    h1 { font-size: 32px; }
-    h2 { font-size: 20px; margin-top: 28px; }
-    p, li { color: var(--text); }
-    .meta { color: var(--muted); margin-bottom: 14px; }
+    h1 { font-size: 30px; }
+    h2 { margin-top: 26px; font-size: 20px; }
+    p, li { margin: 0 0 10px; }
     ul { padding-left: 20px; }
+    .meta { color: var(--muted); margin-bottom: 12px; }
     a { color: var(--accent); }
-    code {
-      background: #eef3ff;
-      border: 1px solid #dbe6ff;
-      border-radius: 6px;
-      padding: 1px 6px;
-      font-size: 92%;
-    }
   </style>
 </head>
 <body>
@@ -57,56 +50,83 @@
       <h1>Privacy Policy for SecurePatrol</h1>
       <p class="meta">Last updated: 2026-03-05</p>
 
-      <p>SecurePatrol is designed for security patrol operations and stores operational data locally on the device by default.</p>
+      <p>SecurePatrol is designed for security patrol operations. By default, app data is stored locally on the device.</p>
 
-      <h2>What data the app handles</h2>
+      <h2>Data we handle</h2>
       <ul>
-        <li>User records (name, role, PIN hash metadata)</li>
-        <li>Patrol logs (timestamps, checkpoint progress, completion status)</li>
-        <li>Registered QR checkpoint metadata</li>
-        <li>Device sync metadata for peer-to-peer synchronization</li>
-        <li>Local audit/crash/activity logs</li>
-        <li>Backup metadata and encrypted backup payloads</li>
+        <li>User profile data used inside the app (for example, account display names and role)</li>
+        <li>Authentication data (PIN hash/salt metadata)</li>
+        <li>Patrol activity data (start/end times, scan timestamps, checkpoint completion state)</li>
+        <li>Registered checkpoint metadata (QR values and admin labels)</li>
+        <li>Sync pairing data (device pair codes and authorized peer IDs)</li>
+        <li>Local audit/security event logs</li>
+        <li>Encrypted backup files and backup metadata</li>
       </ul>
 
-      <h2>How data is stored</h2>
+      <h2>How data is used</h2>
       <ul>
-        <li>Data is stored on-device.</li>
-        <li>Sensitive settings are stored using encrypted preferences where supported.</li>
-        <li>Backups are encrypted with admin credentials/recovery flow before export.</li>
+        <li>Provide patrol operation features</li>
+        <li>Enforce role-based access controls</li>
+        <li>Maintain auditability and security event history</li>
+        <li>Support backup/restore and authorized local sync between devices</li>
       </ul>
 
       <h2>Data sharing</h2>
       <ul>
         <li>No cloud backend is used by default.</li>
-        <li>Data may be shared only between authorized app devices using local peer-to-peer sync features initiated by users/admins.</li>
+        <li>SecurePatrol does not run an app server to collect or store your patrol data.</li>
+        <li>SecurePatrol does not upload your patrol data to developer-controlled servers.</li>
+        <li>No third-party advertising data sharing is used.</li>
+        <li>Data transfer can occur only between authorized app devices when local sync is initiated by a user/admin.</li>
       </ul>
 
-      <h2>Permissions used</h2>
+      <h2>Where your data lives</h2>
       <ul>
-        <li>Camera: QR code scanning.</li>
-        <li>Internet and network state: device-to-device sync workflows.</li>
+        <li>Your operational data is stored on your device.</li>
+        <li>If you enable backup, encrypted backup files are stored in device-selected storage only.</li>
+        <li>We do not keep a copy of your app data on remote servers.</li>
       </ul>
 
-      <h2>Data retention and deletion</h2>
+      <h2>Permissions</h2>
       <ul>
-        <li>Admin users can delete app data records from management screens.</li>
-        <li>Uninstalling the app removes local internal storage data.</li>
-        <li>External backups remain where the admin chose to store them.</li>
+        <li>Camera: QR scanning and camera-based guard workflows.</li>
+        <li>Internet and network state: local network peer discovery and device-to-device sync.</li>
       </ul>
+
+      <h2>Storage and retention</h2>
+      <ul>
+        <li>Primary data is stored on-device.</li>
+        <li>Optional external backups are written to a folder selected by the admin.</li>
+        <li>Data remains until deleted by authorized users or app uninstall.</li>
+        <li>External backups remain in selected storage until removed.</li>
+      </ul>
+
+      <h2>How to request account deletion and data deletion</h2>
+      <p>SecurePatrol does not require a remote account service. Account and data management is handled locally in the app.</p>
+      <ul>
+        <li>Open SecurePatrol and sign in as Admin.</li>
+        <li>For account deletion: go to user management and remove the selected user account (except protected default admin constraints).</li>
+        <li>For patrol/checkpoint/log deletion: use the corresponding management screens in the app.</li>
+        <li>For full data removal on a device: uninstall the app and delete any exported backup files from storage.</li>
+      </ul>
+      <p>Deletion scope: local app records are removed from the device where deletion is performed. If encrypted backup files were exported, they remain until manually removed from the backup location.</p>
 
       <h2>Security controls</h2>
       <ul>
-        <li>PIN-based access controls with role restrictions.</li>
-        <li>Session re-auth timeout.</li>
-        <li>Audit logs for critical actions.</li>
+        <li>PIN-based authentication and role restrictions</li>
+        <li>Auth rate-limiting and re-auth timeout controls</li>
+        <li>Encrypted preference storage where supported</li>
+        <li>Encrypted backup payloads (AES-GCM with key derivation)</li>
       </ul>
 
       <h2>Children</h2>
-      <p>SecurePatrol is not designed for children.</p>
+      <p>SecurePatrol is not directed to children.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>This policy may be updated when app functionality changes. Material changes should be reflected before rollout.</p>
 
       <h2>Contact</h2>
-      <p>For support or privacy requests, contact: <strong>denversavio@gmail.com</strong></p>
+      <p>Email: <strong>denversavio@gmail.com</strong></p>
     </article>
   </main>
 </body>
